@@ -95,15 +95,22 @@
   <div class="main-container">
 
     <!-- LEFT SIDE - SEARCH TASK -->
-    <h4 class="text-center mb-3">Search Task</h4>
-    <form th:action="@{/doSearch}" method="get" class="search-form">
-      <div class="input-group mb-3">
-        <input type="text" name="title" class="form-control" placeholder="Search by title..." required>
-        <button class="btn btn-primary" type="submit">
-          <i class="bi bi-search"></i> Search
-        </button>
+
+    <div id="taskContainer">
+      <div th:each="task : ${tasks}"
+           class="task-item"
+           th:classappend="${task.completed} ? 'completed' : ''">
+        <h5 th:text="${task.title}">Task Title</h5>
+        <p th:text="${task.description}">Description</p>
+        <small th:text="${task.date}">Date</small><br>
+
+        <div class="mt-2">
+          <a th:href="@{'/toggle/' + ${task.id}}" class="btn btn-sm btn-toggle">Toggle</a>
+          <a th:href="@{'/delete/' + ${task.id}}" class="btn btn-sm btn-delete">Delete</a>
+          <a th:href="@{'/update/form/' + ${task.id}}" class="btn btn-sm btn-warning">Edit</a>
+        </div>
       </div>
-    </form>
+    </div>
 
     <!-- RIGHT SIDE - CREATE TASK -->
     <div class="create-task w-50">
