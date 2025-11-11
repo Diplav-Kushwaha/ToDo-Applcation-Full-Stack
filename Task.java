@@ -1,6 +1,5 @@
 package com.diplav.ToDoApplication.models;
 
-
 import lombok.Data;
 import jakarta.persistence.Id;
 import lombok.NoArgsConstructor;
@@ -8,6 +7,7 @@ import lombok.AllArgsConstructor;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.GeneratedValue;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -20,4 +20,7 @@ public class Task {
     private Long id;
     private String title;
     private boolean completed;
+    private String description;
+    private LocalDate date;
+
 }
