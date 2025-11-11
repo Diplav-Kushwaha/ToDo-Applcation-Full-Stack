@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ToDo Application</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin-top: 30px;
+        gap: 20px;
+    }
+    .left-section, .right-section {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        padding: 20px;
+    }
+    .left-section {
+        width: 30%;
+        min-width: 300px;
+    }
+    .right-section {
+        width: 60%;
+    }
+    .task-item {
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        background-color: #fff;
+    }
+    .task-item.completed {
+        text-decoration: line-through;
+        opacity: 0.6;
+    }
+    .btn-toggle {
+        background-color: #198754;
+        color: white;
+    }
+    .btn-delete {
+        background-color: #dc3545;
+        color: white;
+    }
+    .search-form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    .search-form input {
+        flex: 1;
+        border-radius: 8px;
+        border: 1px solid #ced4da;
+        padding: 8px 12px;
+        font-size: 15px;
+    }
+    .search-form button {
+        background-color: #0d6efd;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 8px 18px;
+        font-size: 15px;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+    .search-form button:hover {
+        background-color: #0b5ed7;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+    .btn-primary {
+        background-color: #0d6efd;
+        border: none;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+        background-color: #0b5ed7;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="main-container">
+
+    <!-- LEFT SIDE - SEARCH TASK -->
+    <h4 class="text-center mb-3">Search Task</h4>
+    <form th:action="@{/doSearch}" method="get" class="search-form">
+      <div class="input-group mb-3">
+        <input type="text" name="title" class="form-control" placeholder="Search by title..." required>
+        <button class="btn btn-primary" type="submit">
+          <i class="bi bi-search"></i> Search
+        </button>
+      </div>
+    </form>
+
+    <!-- RIGHT SIDE - CREATE TASK -->
+    <div class="create-task w-50">
+      <h3>Create New Task</h3>
+      <form th:action="@{/create}" th:object="${task}" method="post">
+        <div class="mb-3">
+          <label class="form-label">Task Title</label>
+          <input type="text" name="title" class="form-control" placeholder="Enter task title" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Description</label>
+          <textarea name="description" class="form-control" rows="3" placeholder="Enter description"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Create Task</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.js"></script>
+</body>
+</html>
